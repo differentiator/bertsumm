@@ -2,12 +2,13 @@ import copy
 
 import torch
 import torch.nn as nn
-from pytorch_transformers import BertModel, BertConfig
+from transformers import BertModel, BertConfig
 from torch.nn.init import xavier_uniform_
 
 from models.decoder import TransformerDecoder
 from models.encoder import Classifier, ExtTransformerEncoder
 from models.optimizers import Optimizer
+
 
 def build_optim(args, model, checkpoint):
     """ Build optimizer """

@@ -1,7 +1,7 @@
 import argparse
-from os import path
-from functools import reduce
 import re
+from functools import reduce
+
 
 def str2bool(v):
     if v.lower() in ('yes', 'true', 't', 'y', '1'):

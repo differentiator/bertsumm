@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 """ Translator Class and builder """
 from __future__ import print_function
+
 import codecs
-import os
 import math
 
 import torch
-
 from tensorboardX import SummaryWriter
 
 from others.utils import rouge_results_to_str, test_rouge, tile

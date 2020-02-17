@@ -2,9 +2,9 @@
 Implementation of "Attention is All You Need"
 """
 
+import numpy as np
 import torch
 import torch.nn as nn
-import numpy as np
 
 from models.encoder import PositionalEncoding
 from models.neural import MultiHeadedAttention, PositionwiseFeedForward, DecoderState
