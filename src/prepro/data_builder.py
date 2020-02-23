@@ -8,6 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 from multiprocessing import Pool
 from os.path import join as pjoin
+from os.path import join
 
 import torch
 
@@ -394,7 +395,33 @@ def _format_to_bert(params):
     gc.collect()
 
 
-def format_to_lines(args):
+def format_training(path, save_path):
+    shard_size = 2000
+    pool = Pool(os.cpu_count())
+    dataset = []
+    p_ct = 0
+    for d in pool.imap_unordered(
+        _format_to_lines_training, glob.glob(os.path.join(path, "*.json"))
+    ):
+        dataset.append(d)
+        if len(dataset) > shard_size:
+            pt_file = os.path.join(save_path, f"train_{p_ct}.json")
+            with open(pt_file, "w") as save:
+                # save.write('\n'.join(dataset))
+                save.write(json.dumps(dataset))
+                p_ct += 1
+                dataset = []
+    pool.close()
+    pool.join()
+    if len(dataset) > 0:
+        pt_file = os.path.join(save_path, f"train_{p_ct}.json")
+        with open(pt_file, "w") as save:
+            # save.write('\n'.join(dataset))
+            save.write(json.dumps(dataset))
+            p_ct += 1
+            dataset = []
+
+def rmat_to_lines(args):
     corpus_mapping = {}
     for corpus_type in ["valid", "test", "train"]:
         temp = []
@@ -440,6 +467,11 @@ def format_to_lines(args):
                 save.write(json.dumps(dataset))
                 p_ct += 1
                 dataset = []
+
+
+def _format_to_lines_training(file):
+    source, tgt = load_json(file, True)
+    return {"src": source, "tgt": tgt}
 
 
 def _format_to_lines(params):
