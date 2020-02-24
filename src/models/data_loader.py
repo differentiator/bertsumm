@@ -30,8 +30,8 @@ class Batch(object):
             tgt = torch.tensor(self._pad(pre_tgt, 0))
 
             segs = torch.tensor(self._pad(pre_segs, 0))
-            mask_src = 1 - (src == 0)
-            mask_tgt = 1 - (tgt == 0)
+            mask_src = ~src
+            mask_tgt = ~tgt
 
 
             clss = torch.tensor(self._pad(pre_clss, -1))
