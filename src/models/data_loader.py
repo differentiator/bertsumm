@@ -5,8 +5,9 @@ import random
 
 import torch
 
-from others.logging import logger
+from others.logger import logger
 
+import os
 
 class Batch(object):
     def _pad(self, data, pad_id, width=-1):
@@ -80,7 +81,7 @@ def load_dataset(args, corpus_type, shuffle):
         return dataset
 
     # Sort the glob output by file name (by increasing indexes).
-    pts = sorted(glob.glob(args.bert_data_path + '.' + corpus_type + '.[0-9]*.pt'))
+    pts = sorted(glob.glob(os.path.join(args.bert_data_path, f'{corpus_type}*.pt')))
     if pts:
         if (shuffle):
             random.shuffle(pts)

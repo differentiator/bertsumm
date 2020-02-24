@@ -12,7 +12,7 @@ from os.path import join
 
 import torch
 
-from others.logging import logger
+from others.logger import logger
 from others.tokenization import BertTokenizer
 from others.utils import clean
 from prepro.utils import _get_word_ngrams
@@ -320,7 +320,7 @@ def format_to_bert(args):
         datasets = ["train", "valid", "test"]
     for corpus_type in datasets:
         a_lst = []
-        for json_f in glob.glob(pjoin(args.raw_path, "*" + corpus_type + ".*.json")):
+        for json_f in glob.glob(pjoin(args.raw_path, corpus_type + "*.json")):
             real_name = json_f.split("/")[-1]
             a_lst.append(
                 (
@@ -421,7 +421,7 @@ def format_training(path, save_path):
             p_ct += 1
             dataset = []
 
-def rmat_to_lines(args):
+def format_to_lines(args):
     corpus_mapping = {}
     for corpus_type in ["valid", "test", "train"]:
         temp = []

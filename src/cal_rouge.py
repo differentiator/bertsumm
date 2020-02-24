@@ -8,7 +8,7 @@ import time
 from multiprocessing import Pool
 
 # from onmt.utils.logging import init_logger, logger
-from others import pyrouge
+from others import pyrouge_custom
 
 
 def process(data):
@@ -31,7 +31,7 @@ def process(data):
             with open(tmp_dir + "/reference/ref.{}.txt".format(i), "w",
                       encoding="utf-8") as f:
                 f.write(references[i])
-        r = pyrouge.Rouge155()
+        r = pyrouge_custom.Rouge155()
         r.model_dir = tmp_dir + "/reference/"
         r.system_dir = tmp_dir + "/candidate/"
         r.model_filename_pattern = 'ref.#ID#.txt'

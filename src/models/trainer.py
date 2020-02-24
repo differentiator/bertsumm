@@ -5,7 +5,7 @@ from tensorboardX import SummaryWriter
 
 import distributed
 from models.reporter import ReportMgr, Statistics
-from others.logging import logger
+from others.logger import logger
 from others.utils import test_rouge, rouge_results_to_str
 
 

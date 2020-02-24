@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 
 from distributed import all_gather_list
-from others.logging import logger
+from others.logger import logger
 
 
 def build_report_manager(opt):

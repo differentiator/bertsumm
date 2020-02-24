@@ -4,7 +4,7 @@
 import argparse
 import time
 
-from others.logging import init_logger
+from others.logger import init_logger
 from prepro import data_builder
 
 
