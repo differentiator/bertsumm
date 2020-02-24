@@ -91,7 +91,6 @@ def load_dataset(args, corpus_type, shuffle):
         pt = args.bert_data_path + "." + corpus_type + ".pt"
         yield _lazy_dataset_loader(pt, corpus_type)
 
-
 def abs_batch_size_fn(new, count):
     src, tgt = new[0], new[1]
     global max_n_sents, max_n_tokens, max_size
